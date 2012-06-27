@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Pay It Forward</title>
+    <meta name="description" content="Pay It Forward">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/pay-it-forward.css" />
+
+    <!-- jQuery Mobile -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" />
+    <link rel="stylesheet" href="styles/pay-it-forward.min.css" />
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script>window.jQuery || document.write('<script src="vendor/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="scripts/init.js"></script>
+    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <script>window.jQuery.mobile || document.write('<script src="vendor/jquery.mobile-1.1.0.min.js"><\/script>')</script>
+    <link rel="stylesheet" href="styles/ui.css" />
+  </head>
+  <body>
+    <!-- Splash -->
+    <div class="pif-graphic" data-role="page" data-title="Pay It Forward" id="splash">
+      <div data-role="content">
+        <div class="pif-graphic">
+          <h1 class="pif-title">Pay It Forward</h1>
+          <p class="pif-tag">Pay It Forward</p>
+        </div>
+        <div data-role="navbar">
+          <form action="#splash" data-ajax="false" method="post">
+              <label for="name">Your name *:</label>
+              <input autofocus id="name" name="name" type="text"></textarea>
+              <label for="image">Your avatar (URL):</label>
+              <input id="image" name="image" type="text"></textarea>
+              <button type="submit">Continue</button>
+          </form>
+        </div>
+        <div class="pif-kinvey"></div>
+      </div>
+    </div>
+
+    <!-- Home -->
+    <div data-role="page" data-title="Pay It Forward" id="home">
+      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+        <h1>Pay It Forward</h1>
+      </div>
+      <div data-role="content">
+        <p class="pif-empty">No requests found…</p>
+        <div class="pif-waypoint"></div>
+      </div>
+      <div data-id="navigation" data-position="fixed" data-role="footer">
+        <div data-role="navbar">
+          <ul>
+            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
+            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
+            <li><a data-icon="pif-forwards" data-iconpos="top" href="#forwards">Forwards</a></li>
+            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- New -->
+    <div data-role="page" data-title="What help do you need?" id="new">
+      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+        <h1>What help do you need?</h1>
+        <a data-icon="arrow-l" data-rel="back">Back</a>
+      </div>
+      <div data-role="content">
+        <form action="#new" class="pif-item" data-ajax="false" method="post">
+          <label for="message">I am looking for an introduction to</label>
+          <textarea autofocus id="message" name="message"></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div data-id="navigation" data-position="fixed" data-role="footer">
+        <div data-role="navbar">
+          <ul>
+            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
+            <li><a data-icon="pif-forwards" data-iconpos="top" href="#forwards">Forwards</a></li>
+            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forward -->
+    <div data-role="page" data-title="Forward" id="forward">
+      <div data-role="header">
+        <h1>Enter message</h1>
+      </div>
+      <div data-role="content">
+        <form action="#forward" class="pif-item" data-ajax="false" method="post">
+          <textarea id="message" name="message"></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- My Forwards -->
+    <div data-role="page" data-title="My Forwards" id="forwards">
+      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+        <h1>Pay It Forward</h1>
+        <div data-role="navbar">
+          <ul>
+            <li><a class="ui-btn-active ui-state-persist" data-theme="b">My Forwards</a></li>
+            <li><a href="#allForwards" data-theme="b">All Forwards</a></li>
+            <li><a href="#leaderboard" data-theme="b">Leaderboard</a></li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <p class="pif-empty">No forwards found…</p>
+        <div class="pif-waypoint"></div>
+      </div>
+      <div data-id="navigation" data-position="fixed" data-role="footer">
+        <div data-role="navbar">
+          <ul>
+            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
+            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-forwards" data-iconpos="top">Forwards</a></li>
+            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Forwards -->
+    <div data-role="page" data-title="All Forwards" id="allForwards">
+      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+        <h1>Pay It Forward</h1>
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#forwards" data-theme="b">My Forwards</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-theme="b">All Forwards</a></li>
+            <li><a href="#leaderboard" data-theme="b">Leaderboard</a></li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <p class="pif-empty">No forwards found…</p>
+        <div class="pif-waypoint"></div>
+      </div>
+      <div data-id="navigation" data-position="fixed" data-role="footer">
+        <div data-role="navbar">
+          <ul>
+            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
+            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-forwards" data-iconpos="top">Forwards</a></li>
+            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div data-role="page" data-title="All Forwards" id="leaderboard">
+      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+        <h1>Pay It Forward</h1>
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#forwards" data-theme="b">My Forwards</a></li>
+            <li><a href="#allForwards" data-theme="b">All Forwards</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-theme="b">Leaderboard</a></li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <p class="pif-empty">No leaderboard yet…</p>
+      </div>
+      <div data-id="navigation" data-position="fixed" data-role="footer">
+        <div data-role="navbar">
+          <ul>
+            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
+            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-forwards" data-iconpos="top">Forwards</a></li>
+            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div data-role="page" data-title="Settings" id="settings">
+      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+        <h1>Settings</h1>
+        <a data-icon="arrow-l" data-rel="back">Back</a>
+      </div>
+      <div data-role="content">
+        <div class="pif-graphic">
+          <h1 class="pif-about">About</h1>
+          <p>This app demoes the use of the Kinvey JavaScript Library. This app was used as official app for the #RubyRiot event.</p>
+          <div class="pif-kinvey"></div>
+        </div>
+      </div>
+      <div data-id="navigation" data-position="fixed" data-role="footer">
+        <div data-role="navbar">
+          <ul>
+            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
+            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
+            <li><a data-icon="pif-forwards" data-iconpos="top" href="#forwards">Forwards</a></li>
+            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-settings" data-iconpos="top">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offline -->
+    <div data-role="page" data-title="Offline" id="offline">
+      <div data-role="header" data-tap-toggle="false">
+        <h1>Pay It Forward</h1>
+      </div>
+      <div data-role="content">This app cannot be used offline.</div>
+    </div>
+
+    <!-- Templates -->
+    <script id="tpl-error" type="text/x-handlebars-template">
+      <div class="pif-error">{{msg}}</div>
+    </script>
+    <script id="tpl-forwards" type="text/x-handlebars-template">
+      <ol class="pif-list">
+        {{#each list}}
+        <li class="pif-item pif-split">
+          <p class="pif-meta">{{formatDate}}</p>
+          <div class="pif-content">
+            <img class="pif-picture" src="{{prop "author" "image"}}" />
+            <div class="pif-details">
+              <p class="pif-name">{{prop "author" "name"}}</p>
+            </div>
+          </div>
+          <div class="pif-content pif-out">
+            <img class="pif-picture" src="{{prop "to" "image"}}" />
+            <div class="pif-details">
+              <p class="pif-name">{{prop "to" "name"}}</p>
+            </div>
+          </div>
+          <p class="pif-forward-text">{{#if ../mine}}{{prop "message"}}{{else}}… paid it forward to …{{/if}}</p>
+        </li>
+        {{/each}}
+      </ol>
+    </script>
+    <script id="tpl-requests" type="text/x-handlebars-template">
+      <ol class="pif-list">
+        {{#each list}}
+        <li class="pif-item">
+          <p class="pif-meta">{{formatDate}}</p>
+          <div class="pif-content">
+            <img class="pif-picture" src="{{prop "author" "image"}}" />
+            <div class="pif-details">
+              <p class="pif-name">{{prop "author" "name"}}</p>
+              <p class="pif-message">is looking for an introduction to <strong>{{prop "message"}}</strong></p>
+            </div>
+          </div>
+          <div class="pif-pif">
+            <a class="pif-pif-inner" data-inline="true" data-mini="true" data-rel="dialog"
+              data-name="{{prop "author" "name"}}" data-id="{{prop "author" "id"}}" data-image="{{prop "author" "image"}}"
+              data-role="button" href="#forward">Pay It Forward</a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+    </script>
+    <script id="tpl-leaderboard" type="text/x-handlebars-template">
+      <ol class="pif-list">
+        {{#list}}
+        <li class="pif-content pif-item">
+          <img class="pif-picture" src="{{author.image}}" />
+          <div class="pif-details">
+            <p class="pif-name">{{author.name}}</p>
+            <p class="pif-message">… paid it forward <strong>{{count}}</strong> times.</p>
+          </div>
+        </li>
+        {{/list}}
+      </ol>
+    </script>
+
+    <!-- Scripts -->
+    <script>
+    // Polyfill for Android 2.X.
+    Object.defineProperty || document.write('<script defer src="vendor/es5-shim.min.js"><\/script>');
+    !isNaN(Date.parse('1970-01-01T00:00:00.000Z')) || document.write('<script defer src="vendor/iso8601.min.js"><\/script>');
+    </script>
+
+    <script defer src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.4.min.js"></script>
+    <script defer src="vendor/handlebars-1.0.0.beta.6.js"></script>
+    <script defer src="vendor/waypoints.min.js"></script>
+
+    <script defer src="scripts/app.js"></script>
+    <script defer src="scripts/ui.js"></script>
+  </body>
+</html>

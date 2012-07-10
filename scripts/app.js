@@ -15,10 +15,9 @@
    */
   // Define the base entity. Not accessible from outside current scope.
   var Entity = Kinvey.Entity.extend({
-    // Returns date entity was added.
+    // Convenience shortcut for returning the last modified date.
     added: function() {
-      var kmd = this.get('_kmd');
-      return kmd ? kmd.lmt : null;
+      return this.getMetadata().lastModified();
     }
   });
 

@@ -282,12 +282,16 @@
 
     <!-- Scripts -->
     <script>
-    // Polyfill for Android 2.X.
-    Object.defineProperty || document.write('<script defer src="vendor/es5-shim.min.js"><\/script>');
-    !isNaN(Date.parse('1970-01-01T00:00:00.000Z')) || document.write('<script defer src="vendor/iso8601.min.js"><\/script>');
+      // Shims for Android 2.X.
+      Object.defineProperty || document.write('<script defer src="vendor/es5-shim.min.js"><\/script>');
+      !isNaN(Date.parse('1970-01-01T00:00:00.000Z')) || document.write('<script defer src="vendor/iso8601.min.js"><\/script>');
+
+      // IndexedDB shim.
+      window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB ||
+      document.write('<script defer src="vendor/IndexedDBShim.min.js"><\/script>');
     </script>
 
-    <script defer src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.6.min.js"></script>
+    <script defer src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.7.min.js"></script>
     <script defer src="vendor/handlebars-1.0.0.beta.6.js"></script>
     <script defer src="vendor/waypoints.min.js"></script>
 

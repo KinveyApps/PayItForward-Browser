@@ -1,7 +1,9 @@
 @charset "utf-8";
 
 /* jQuery Mobile overrides */
-
+.offline [data-role="header"] h1:after {
+	content: ' [offline mode]';
+}
 
 /* Texts */
 @font-face {

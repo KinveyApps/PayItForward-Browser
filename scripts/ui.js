@@ -4,6 +4,19 @@
   // Import.
   var App = window.PayItForward;
 
+  // Set syncing behavior.
+  Kinvey.Sync.configure({
+    start: function() {
+      // Show loading animation.
+      $('body').loading(true);
+    },
+    success: function() {
+      // Refresh current view.
+      $('body').removeClass('offline').loading(false);
+      $.mobile.changePage($.mobile.activePage, { allowSamePageTransition: true });
+    }
+  });
+
   // Template helpers.
   Handlebars.registerHelper('formatDate', function() {
     var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -45,31 +58,11 @@
     });
   };
 
-  /**
-   * Document-level events.
-   */
-  var document_ = $(document);
-  document_.on({
-    // Events to handle changing network connection status.
-    offline: function() {
-      $.mobile.changePage('#offline');
-    },
-    online: function() {
-      $.mobile.changePage('#home');
-    },
-    pagebeforeshow: function() {
-      // Disable navigation if in offline mode.
-      if(!navigator.onLine && 'offline' !== $.mobile.activePage.attr('id')) {
-        document_.trigger('offline');
-      }
-    }
-  });
-
   // Event to redirect the user to the splash screen if it has no account.
   var queue = [];
   $('[data-role="page"]').on('pageinit pageshow', function(e) {
     var page = $(this);
-    if(null === Kinvey.getCurrentUser() && -1 === ['offline', 'splash'].indexOf(page.attr('id'))) {
+    if(null === Kinvey.getCurrentUser() && 'splash' !== page.attr('id')) {
       e.stopImmediatePropagation();
 
       // The pageinit event needs to be executed, but at a later stage.
@@ -77,6 +70,11 @@
         queue.push(page);
       }
       $.mobile.changePage('#splash');
+    }
+
+    // Add network status indicator to page title.
+    if(!Kinvey.Sync.isOnline) {
+      $('body').addClass('offline');
     }
   });
 
@@ -174,13 +172,12 @@
               // Re-enable infinite scroll.
               trigger.waypoint(opts);
             }
-
-            // Re-enable event.
-            home.loading(false);
           },
           error: function() {
-            // Re-enable event.
             error('Failed to retrieve any requests.');
+          },
+          complete: function() {
+            // Re-enable event.
             home.loading(false);
           }
         });
@@ -210,13 +207,12 @@
               content.prepend(html).trigger('create');
             }
           }
-
-          // Re-enable event.
-          home.loading(false);
         },
         error: function() {
-          // Re-enable event.
           error('Failed to retrieve any new requests.');
+        },
+        complete: function() {
+          // Re-enable event.
           home.loading(false);
         }
       });
@@ -252,6 +248,7 @@
         }
 
         // Save.
+        var success = false;
         var user = Kinvey.getCurrentUser();
         new App.Request({
           author: {
@@ -262,14 +259,19 @@
           message: vMessage
         }).save({
           success: function() {
-            // Re-enable event and redirect.
-            form.loading(false);
-            $.mobile.changePage('#home');
+            success = true;
           },
           error: function() {
-            // Re-enable event.
             error('Failed to save your request.');
+          },
+          complete: function() {
+            // Re-enable event.
             form.loading(false);
+
+            // Redirect to home in case of success.
+            if(success) {
+              $.mobile.changePage('#home');
+            }
           }
         });
       });
@@ -319,6 +321,7 @@
         }
 
         // Save.
+        var success = false;
         var user = Kinvey.getCurrentUser();
         new App.Forward({
           author: {
@@ -330,14 +333,19 @@
           message: vMessage
         }).save({
           success: function() {
-            // Re-enable event and redirect.
-            form.loading(false);
-            $.mobile.changePage('#home');
+            success = true;
           },
           error: function() {
-            // Re-enable event.
             error('Failed to pay it forward.');
+          },
+          complete: function() {
+            // Re-enable event.
             form.loading(false);
+            
+            // Redirect to home in case of success.
+            if(success) {
+              $.mobile.changePage('#home');
+            }
           }
         });
       });
@@ -387,13 +395,12 @@
               // Re-enable infinite scroll.
               trigger.waypoint(opts);
             }
-
-            // Re-enable event.
-            forwards.loading(false);
           },
           error: function() {
-            // Re-enable event.
             error('Failed to retrieve any forwards.');
+          },
+          complete: function() {
+            // Re-enable event.
             forwards.loading(false);
           }
         });
@@ -425,13 +432,12 @@
               content.prepend(html).trigger('create');
             }
           }
-
-          // Re-enable event.
-          forwards.loading(false);
         },
         error: function() {
-          // Re-enable event.
           error('Failed to retrieve any forwards.');
+        },
+        complete: function() {
+          // Re-enable event.
           forwards.loading(false);
         }
       });
@@ -477,13 +483,12 @@
               // Re-enable infinite scroll.
               trigger.waypoint(opts);
             }
-
-            // Re-enable event.
-            allForwards.loading(false);
           },
           error: function() {
-            // Re-enable event.
             error('Failed to retrieve any forwards.');
+          },
+          complete: function() {
+            // Re-enable event.
             allForwards.loading(false);
           }
         });
@@ -514,13 +519,12 @@
               content.prepend(html).trigger('create');
             }
           }
-
-          // Re-enable event.
-          allForwards.loading(false);
         },
         error: function() {
-          // Re-enable event.
           error('Failed to retrieve any forwards.');
+        },
+        complete: function() {
+          // Re-enable event.
           allForwards.loading(false);
         }
       });
@@ -546,13 +550,12 @@
           leaderboard.find('[data-role="content"]')
                      .html(template('#tpl-leaderboard', { list: data }));
         }
-
-        // Re-enable event.
-        leaderboard.loading(false);
       },
       error: function() {
-        // Re-enable event.
         error('Failed to retrieve the leaderboard.');
+      },
+      complete: function() {
+        // Re-enable event.
         leaderboard.loading(false);
       }
     });

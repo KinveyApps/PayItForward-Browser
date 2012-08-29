@@ -33,11 +33,7 @@
         </div>
         <div data-role="navbar">
           <form action="#splash" data-ajax="false" method="post">
-              <label for="name">Your name *:</label>
-              <input autofocus id="name" name="name" type="text"></textarea>
-              <label for="image">Your avatar (URL):</label>
-              <input id="image" name="image" type="text"></textarea>
-              <button type="submit">Continue</button>
+              <button type="submit">Login with Facebook</button>
           </form>
         </div>
         <div class="pif-kinvey"></div>
@@ -211,14 +207,6 @@
       </div>
     </div>
 
-    <!-- Offline -->
-    <div data-role="page" data-title="Offline" id="offline">
-      <div data-role="header" data-tap-toggle="false">
-        <h1>Pay It Forward</h1>
-      </div>
-      <div data-role="content">This app cannot be used offline.</div>
-    </div>
-
     <!-- Templates -->
     <script id="tpl-error" type="text/x-handlebars-template">
       <div class="pif-error">{{msg}}</div>
@@ -291,11 +279,31 @@
       document.write('<script defer src="vendor/IndexedDBShim.min.js"><\/script>');
     </script>
 
-    <script defer src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.9.min.js"></script>
+    <script defer src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.10.min.js"></script>
     <script defer src="vendor/handlebars-1.0.0.beta.6.js"></script>
     <script defer src="vendor/waypoints.min.js"></script>
 
     <script defer src="scripts/app.js"></script>
     <script defer src="scripts/ui.js"></script>
+
+    <!-- Facebook -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '<your-facebook-app-id>', // App ID
+          oauth: true
+        });
+      };
+
+      // Load the SDK Asynchronously.
+      (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document));
+    </script>
   </body>
 </html>

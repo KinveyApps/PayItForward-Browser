@@ -96,33 +96,36 @@
         }
         form.loading(true);
 
-        // Pull and validate name.
-        var name = form.find('[name="name"]');
-        var vName = name.val();
-        if(vName.match(/^\s*$/)) {
-          // Set error state and re-enable event.
-          name.addClass('pif-form-error');
-          form.loading(false);
-          return;
-        }
-        var vImage = form.find('[name="image"]').val();
+        // Popup Facebook login.
+        FB.login(function(response) {
+          if(response.authResponse) {// Authorized.
+            var accessToken = response.authResponse.accessToken;
 
-        // Save.
-        Kinvey.User.create({
-          name: vName,
-          image: vImage || 'images/picture.jpg'
-        }, {
-          success: function() {
-            // Trigger any outstanding init events.
-            while(0 !== queue.length) {
-              queue.shift().trigger('pageinit');
-            }
-            form.loading(false);
-            $.mobile.changePage('#home');
-          },
-          error: function() {
+            // Retrieve user information.
+            FB.api('/me?fields=name,picture', function(response) {
+              new Kinvey.User().loginWithFacebook(accessToken, {// Login.
+                name: response.name,
+                image: response.picture.data.url
+              }, {
+               success: function() {
+                  // Trigger any outstanding init events.
+                  while(0 !== queue.length) {
+                    queue.shift().trigger('pageinit');
+                  }
+                  form.loading(false);
+                  $.mobile.changePage('#home');
+                },
+                error: function() {
+                  // Re-enable event.
+                  error('Failed to create a user.');
+                  form.loading(false);
+                }
+              });
+            });
+          }
+          else {// User denied access.
             // Re-enable event.
-            error('Failed to create a user.');
+            error('You can only login with Facebook.');
             form.loading(false);
           }
         });

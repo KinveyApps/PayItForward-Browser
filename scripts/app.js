@@ -1,7 +1,5 @@
 (function(window, Kinvey) {
-  /*globals window, Kinvey*/
-
-  // Export.
+  //Export, so declarations can be accessed outside this files’ scope.
   var App = window.PayItForward = {};
 
   // Configure conflict policy prior to init, since that will trigger
@@ -12,7 +10,7 @@
   Kinvey.init({
     appKey: '<your-app-key>',
     appSecret: '<your-app-secret>',
-    sync: true
+    sync: true// Enable offline saving.
   });
 
   /**
@@ -23,7 +21,7 @@
     // Override constructor to use the OfflineStore.
     constructor: function(attr, collection) {
       Kinvey.Entity.prototype.constructor.call(this, attr, collection, {
-        store: Kinvey.Store.OFFLINE
+        store: Kinvey.Store.OFFLINE// Enable offline saving.
       });
     },
 
@@ -54,7 +52,7 @@
     // Override constructor to use the OfflineStore.
     constructor: function(collection, options) {
       options || (options = {});
-      options.store = Kinvey.Store.OFFLINE;
+      options.store = Kinvey.Store.OFFLINE;// Enable offline saving.
       Kinvey.Collection.prototype.constructor.call(this, collection, options);
     },
 
@@ -162,8 +160,7 @@
     }
   });
 
-  // Application instances.
+  // Export collection instances.
   App.ForwardCollection = new ForwardCollection();
   App.AllForwardCollection = new ForwardCollection();
-
 }(window, Kinvey));

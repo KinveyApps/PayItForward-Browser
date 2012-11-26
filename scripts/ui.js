@@ -1,17 +1,15 @@
 (function(window, document, Kinvey, $, Handlebars) {
-  /*globals Kinvey, Handlebars*/
-
-  // Import.
+  // Import declarations into current scope.
   var App = window.PayItForward;
 
-  // Set syncing behavior.
+  // Listen for synchronization occurrences.
   Kinvey.Sync.configure({
     start: function() {
-      // Show loading animation.
-      $('body').loading(true);
+      // Synchronization process started.
+      $('body').loading(true);// Show loading animation.
     },
     success: function() {
-      // Refresh current view.
+      // Synchronization process was successful. Refresh current view.
       $('body').removeClass('offline').loading(false);
       $.mobile.changePage($.mobile.activePage, { allowSamePageTransition: true });
     }
@@ -565,7 +563,7 @@
   });
 
   /**
-   * Settings screen. Just contains information about this app.
+   * Settings screen. Solely contains information about this app.
    */
 //  var settings = $('#settings');
 

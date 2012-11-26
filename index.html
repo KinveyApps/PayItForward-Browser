@@ -10,17 +10,19 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles/pay-it-forward.css" />
-
-    <!-- jQuery Mobile -->
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" />
+    <!-- jQuery Mobile set-up -->
     <link rel="stylesheet" href="styles/pay-it-forward.min.css" />
-    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script>window.jQuery || document.write('<script src="vendor/jquery-1.7.2.min.js"><\/script>')</script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
+
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script>window.jQuery || document.write('<script src="vendor/jquery-1.8.3.min.js"><\/script>')</script>
+
     <script src="scripts/init.js"></script>
-    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-    <script>window.jQuery.mobile || document.write('<script src="vendor/jquery.mobile-1.1.0.min.js"><\/script>')</script>
+
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script>window.jQuery.mobile || document.write('<script src="vendor/jquery.mobile-1.2.0.min.js"><\/script>')</script>
+
+    <!-- Application-specific styles -->
     <link rel="stylesheet" href="styles/ui.css" />
   </head>
   <body>
@@ -268,23 +270,20 @@
       </ol>
     </script>
 
-    <!-- Scripts -->
+    <!-- Add JavaScript libraries -->
     <script>
-      // Shims for Android 2.X.
-      Object.defineProperty || document.write('<script defer src="vendor/es5-shim.min.js"><\/script>');
-      !isNaN(Date.parse('1970-01-01T00:00:00.000Z')) || document.write('<script defer src="vendor/iso8601.min.js"><\/script>');
+      // Load ECMAScript5 shim if needed (Android 2.1, Firefox 3.5 and 3.6).
+      Object.defineProperty || document.write('<script src="vendor/es5-shim.min.js"><\/script>');
+      !isNaN(Date.parse('1970-01-01T00:00:00.000Z')) || document.write('<script src="vendor/iso8601.min.js"><\/script>');
 
-      // IndexedDB shim.
+      // Load IndexedDB shim if needed.
       window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB ||
-      document.write('<script defer src="vendor/IndexedDBShim.min.js"><\/script>');
+      document.write('<script src="vendor/IndexedDBShim.min.js"><\/script>');
     </script>
 
-    <script defer src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.10.min.js"></script>
-    <script defer src="vendor/handlebars-1.0.0.beta.6.js"></script>
-    <script defer src="vendor/waypoints.min.js"></script>
-
-    <script defer src="scripts/app.js"></script>
-    <script defer src="scripts/ui.js"></script>
+    <script src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.10.min.js"></script>
+    <script src="vendor/handlebars-1.0.0.beta.6.js"></script>
+    <script src="vendor/waypoints.min.js"></script>
 
     <!-- Facebook -->
     <div id="fb-root"></div>
@@ -305,5 +304,9 @@
         ref.parentNode.insertBefore(js, ref);
       }(document));
     </script>
+
+    <!-- Application-specific JavaScript files -->
+    <script defer src="scripts/app.js"></script>
+    <script defer src="scripts/ui.js"></script>
   </body>
 </html>

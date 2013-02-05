@@ -95,36 +95,47 @@
         form.loading(true);
 
         // Popup Facebook login.
-        FB.login(function(response) {
-          if(response.authResponse) {// Authorized.
-            var accessToken = response.authResponse.accessToken;
-
-            // Retrieve user information.
-            FB.api('/me?fields=name,picture', function(response) {
-              new Kinvey.User().loginWithFacebook(accessToken, {// Login.
-                name: response.name,
-                image: response.picture.data.url
-              }, {
-               success: function() {
-                  // Trigger any outstanding init events.
-                  while(0 !== queue.length) {
-                    queue.shift().trigger('pageinit');
-                  }
-                  form.loading(false);
-                  $.mobile.changePage('#home');
-                },
-                error: function() {
-                  // Re-enable event.
-                  error('Failed to create a user.');
-                  form.loading(false);
+        FB.getLoginStatus(function(response) {
+          // Define handler to login to Kinvey.
+          var login = function(response, data) {
+            new Kinvey.User().loginWithFacebook({
+              access_token: response.authResponse.accessToken,
+              expires_in: response.authResponse.expiresIn
+            }, data, {
+              success: function() {
+                // Trigger any outstanding init events.
+                while(0 !== queue.length) {
+                  queue.shift().trigger('pageinit');
                 }
-              });
+                form.loading(false);
+                $.mobile.changePage('#home');
+              },
+              error: function() {
+                // Re-enable event.
+                error('Failed to create a user.');
+                form.loading(false);
+              }
             });
+          };
+
+          // If user already authorized the app, login directly.
+          if('connected' === response.status) {
+            login(response);
           }
-          else {// User denied access.
-            // Re-enable event.
-            error('You can only login with Facebook.');
-            form.loading(false);
+          else {// Otherwise, pop-up login and wait for authorization.
+            FB.Event.subscribe('auth.authResponseChange', function(response) {
+              FB.api('/me?fields=name,picture', function(data) {
+                login(response, { name: data.name, image: data.picture.data.url });
+              });
+              FB.Event.unsubscribe('auth.authResponseChange');
+            });
+            FB.login(function(response) {
+              if(null === response.authResponse) {// User denied access.
+                // Re-enable event.
+                error('You can only login with Facebook.');
+                form.loading(false);
+              }
+            });
           }
         });
       });

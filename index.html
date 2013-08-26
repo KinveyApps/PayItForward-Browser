@@ -2,311 +2,216 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-
     <title>Pay It Forward</title>
-    <meta name="description" content="Pay It Forward">
 
+    <meta name="description" content="Pay It Forward">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- jQuery Mobile set-up -->
-    <link rel="stylesheet" href="styles/pay-it-forward.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
+    <!-- jQuery. -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script>window.jQuery || document.write('<script src="vendor/jquery-1.8.3.min.js"><\/script>')</script>
-
+    <!-- Application scripts. -->
     <script src="scripts/init.js"></script>
 
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-    <script>window.jQuery.mobile || document.write('<script src="vendor/jquery.mobile-1.2.0.min.js"><\/script>')</script>
-
-    <!-- Application-specific styles -->
-    <link rel="stylesheet" href="styles/ui.css" />
+    <!-- jQuery Mobile. -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" rel="stylesheet" />
+    
+    
+    <!-- Application styles. -->
+    <link href="styles/main.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- Splash -->
-    <div class="pif-graphic" data-role="page" data-title="Pay It Forward" id="splash">
-      <div data-role="content">
-        <div class="pif-graphic">
-          <h1 class="pif-title">Pay It Forward</h1>
-          <p class="pif-tag">Pay It Forward</p>
-        </div>
-        <div data-role="navbar">
-          <form action="#splash" data-ajax="false" method="post">
-              <button type="submit">Login with Facebook</button>
-          </form>
-        </div>
-        <div class="pif-kinvey"></div>
-      </div>
-    </div>
 
-    <!-- Home -->
-    <div data-role="page" data-title="Pay It Forward" id="home">
-      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+    <!-- Splash page. -->
+    <div data-role="page" id="splash">
+      <div data-role="header" data-position="fixed">
         <h1>Pay It Forward</h1>
       </div>
       <div data-role="content">
-        <p class="pif-empty">No requests found…</p>
-        <div class="pif-waypoint"></div>
-      </div>
-      <div data-id="navigation" data-position="fixed" data-role="footer">
         <div data-role="navbar">
           <ul>
-            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
-            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
-            <li><a data-icon="pif-forwards" data-iconpos="top" href="#forwards">Forwards</a></li>
-            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+            <li><a class="signup" href="#">Login with Facebook</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- New -->
-    <div data-role="page" data-title="What help do you need?" id="new">
-      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+    <!-- Home. -->
+    <div data-role="page" data-title="Requests - Pay It Forward" id="home">
+      <div data-role="header" data-position="fixed">
+        <h1>Pay It Forward</h1>
+        <a class="logout ui-btn-right" href="#">Logout</a>
+      </div>
+      <div data-role="content">
+        <ul class="data" data-role="listview" data-icon="forward" data-inset="true"></ul>
+        <div class="empty hidden ui-bar ui-bar-e">No data yet.</div>
+        <a class="more" data-role="button" href="#">More</a>
+      </div>
+      <div data-id="navigation" data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a class="ui-btn-active ui-state-persist" href="#home">Requests</a></li>
+            <li><a href="#new">New</a></li>
+            <li><a href="#forwards">Forwards</a></li>
+            <li><a href="#settings">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Forward -->
+      <div class="popup" data-role="popup" data-theme="a" id="forward">
+        <h3>Enter message</h3>
+        <form action="#forward" data-ajax="false" method="post">
+          <input autofocus id="message" name="message" />
+          <div data-role="controlgroup" data-type="horizontal">
+            <button data-icon="check" data-mini="true" type="submit">Submit</button>
+            <a data-role="button" data-icon="delete" data-mini="true" data-rel="back" href="#">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- New. -->
+    <div data-role="page" data-title="What help do you need? - Pay It Forward" id="new">
+      <div data-role="header" data-position="fixed">
+        <a data-icon="delete" data-rel="back">Cancel</a>
         <h1>What help do you need?</h1>
-        <a data-icon="arrow-l" data-rel="back">Back</a>
       </div>
       <div data-role="content">
-        <form action="#new" class="pif-item" data-ajax="false" method="post">
+        <form action="#new" data-ajax="false" method="post">
           <label for="message">I am looking for an introduction to</label>
-          <textarea autofocus id="message" name="message"></textarea>
-          <button type="submit">Submit</button>
+          <input autofocus id="message" name="message" type="text" />
+          <button data-icon="check" type="submit">Submit</button>
         </form>
       </div>
       <div data-id="navigation" data-position="fixed" data-role="footer">
         <div data-role="navbar">
           <ul>
-            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
-            <li><a data-icon="pif-forwards" data-iconpos="top" href="#forwards">Forwards</a></li>
-            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+            <li><a href="#home">Requests</a></li>
+            <li><a class="ui-btn-active ui-state-persist" href="#new">New</a></li>
+            <li><a href="#forwards">Forwards</a></li>
+            <li><a href="#settings">Settings</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Forward -->
-    <div data-role="page" data-title="Forward" id="forward">
-      <div data-role="header">
-        <h1>Enter message</h1>
-      </div>
-      <div data-role="content">
-        <form action="#forward" class="pif-item" data-ajax="false" method="post">
-          <textarea id="message" name="message"></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- My Forwards -->
-    <div data-role="page" data-title="My Forwards" id="forwards">
-      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+    <!-- My Forwards. -->
+    <div data-role="page" data-title="My Forwards - Pay It Forward" id="forwards">
+      <div data-role="header" data-position="fixed">
         <h1>Pay It Forward</h1>
+        <a class="logout ui-btn-right" href="#">Logout</a>
         <div data-role="navbar">
           <ul>
-            <li><a class="ui-btn-active ui-state-persist" data-theme="b">My Forwards</a></li>
-            <li><a href="#allForwards" data-theme="b">All Forwards</a></li>
-            <li><a href="#leaderboard" data-theme="b">Leaderboard</a></li>
+            <li><a class="ui-btn-active ui-state-persist">My Forwards</a></li>
+            <li><a href="#allForwards">All Forwards</a></li>
+            <li><a href="#leaderboard">Leaderboard</a></li>
           </ul>
         </div>
       </div>
       <div data-role="content">
-        <p class="pif-empty">No forwards found…</p>
-        <div class="pif-waypoint"></div>
+        <ul class="data" data-role="listview" data-inset="true"></ul>
+        <div class="empty hidden ui-bar ui-bar-e">No data yet.</div>
+        <a class="more" data-role="button" href="#">More</a>
       </div>
-      <div data-id="navigation" data-position="fixed" data-role="footer">
+      <div data-id="navigation" data-role="footer" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
-            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-forwards" data-iconpos="top">Forwards</a></li>
-            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+            <li><a href="#home">Requests</a></li>
+            <li><a href="#new">New</a></li>
+            <li><a class="ui-btn-active ui-state-persist">Forwards</a></li>
+            <li><a href="#settings">Settings</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- All Forwards -->
-    <div data-role="page" data-title="All Forwards" id="allForwards">
-      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+    <!-- All Forwards. -->
+    <div data-role="page" data-title="All Forwards - Pay It Forward" id="allForwards">
+      <div data-role="header" data-position="fixed">
         <h1>Pay It Forward</h1>
+        <a class="logout ui-btn-right" href="#">Logout</a>
         <div data-role="navbar">
           <ul>
-            <li><a href="#forwards" data-theme="b">My Forwards</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-theme="b">All Forwards</a></li>
-            <li><a href="#leaderboard" data-theme="b">Leaderboard</a></li>
+            <li><a href="#forwards">My Forwards</a></li>
+            <li><a class="ui-btn-active ui-state-persist">All Forwards</a></li>
+            <li><a href="#leaderboard">Leaderboard</a></li>
           </ul>
         </div>
       </div>
       <div data-role="content">
-        <p class="pif-empty">No forwards found…</p>
-        <div class="pif-waypoint"></div>
+        <ul class="data" data-role="listview" data-inset="true"></ul>
+        <div class="empty hidden ui-bar ui-bar-e">No data yet.</div>
+        <a class="more" data-role="button" href="#">More</a>
       </div>
-      <div data-id="navigation" data-position="fixed" data-role="footer">
+      <div data-id="navigation" data-role="footer" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
-            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-forwards" data-iconpos="top">Forwards</a></li>
-            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+            <li><a href="#home">Requests</a></li>
+            <li><a href="#new">New</a></li>
+            <li><a class="ui-btn-active ui-state-persist">Forwards</a></li>
+            <li><a href="#settings">Settings</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Leaderboard -->
-    <div data-role="page" data-title="All Forwards" id="leaderboard">
-      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+    <!-- Leaderboard. -->
+    <div data-role="page" data-title="Leaderboard - Pay It Forward" id="leaderboard">
+      <div data-role="header" data-position="fixed">
         <h1>Pay It Forward</h1>
+        <a class="logout ui-btn-right" href="#">Logout</a>
         <div data-role="navbar">
           <ul>
-            <li><a href="#forwards" data-theme="b">My Forwards</a></li>
-            <li><a href="#allForwards" data-theme="b">All Forwards</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-theme="b">Leaderboard</a></li>
+            <li><a href="#forwards">My Forwards</a></li>
+            <li><a href="#allForwards">All Forwards</a></li>
+            <li><a class="ui-btn-active ui-state-persist">Leaderboard</a></li>
           </ul>
         </div>
       </div>
-      <div data-role="content">
-        <p class="pif-empty">No leaderboard yet…</p>
-      </div>
-      <div data-id="navigation" data-position="fixed" data-role="footer">
+      <div data-role="content"></div>
+      <div data-id="navigation" data-role="footer" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
-            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-forwards" data-iconpos="top">Forwards</a></li>
-            <li><a data-icon="pif-settings" data-iconpos="top" href="#settings">Settings</a></li>
+            <li><a href="#home">Requests</a></li>
+            <li><a href="#new">New</a></li>
+            <li><a class="ui-btn-active ui-state-persist">Forwards</a></li>
+            <li><a href="#settings">Settings</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Settings -->
-    <div data-role="page" data-title="Settings" id="settings">
-      <div data-position="fixed" data-role="header" data-tap-toggle="false">
+    <!-- Settings. -->
+    <div data-role="page" data-title="Settings - Pay It Forward" id="settings">
+      <div data-role="header" data-position="fixed">
         <h1>Settings</h1>
         <a data-icon="arrow-l" data-rel="back">Back</a>
       </div>
       <div data-role="content">
-        <div class="pif-graphic">
-          <h1 class="pif-about">About</h1>
-          <p>This app demoes the use of the Kinvey JavaScript Library. This app was used as official app for the #RubyRiot event.</p>
-          <div class="pif-kinvey"></div>
-        </div>
+        <h2>About</h2>
+        <p>This app demos the use of the Kinvey JavaScript Library. This app was used as official app for the #RubyRiot event.</p>
       </div>
-      <div data-id="navigation" data-position="fixed" data-role="footer">
+      <div data-id="navigation" data-role="footer" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a data-icon="pif-requests" data-iconpos="top" href="#home">Requests</a></li>
-            <li><a data-icon="pif-new" data-iconpos="top" href="#new">New</a></li>
-            <li><a data-icon="pif-forwards" data-iconpos="top" href="#forwards">Forwards</a></li>
-            <li><a class="ui-btn-active ui-state-persist" data-icon="pif-settings" data-iconpos="top">Settings</a></li>
+            <li><a href="#home">Requests</a></li>
+            <li><a href="#new">New</a></li>
+            <li><a href="#forwards">Forwards</a></li>
+            <li><a class="ui-btn-active ui-state-persist">Settings</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Templates -->
-    <script id="tpl-error" type="text/x-handlebars-template">
-      <div class="pif-error">{{msg}}</div>
-    </script>
-    <script id="tpl-forwards" type="text/x-handlebars-template">
-      <ol class="pif-list">
-        {{#each list}}
-        <li class="pif-item pif-split">
-          <p class="pif-meta">{{formatDate}}</p>
-          <div class="pif-content">
-            <img class="pif-picture" src="{{prop "author" "image"}}" />
-            <div class="pif-details">
-              <p class="pif-name">{{prop "author" "name"}}</p>
-            </div>
-          </div>
-          <div class="pif-content pif-out">
-            <img class="pif-picture" src="{{prop "to" "image"}}" />
-            <div class="pif-details">
-              <p class="pif-name">{{prop "to" "name"}}</p>
-            </div>
-          </div>
-          <p class="pif-forward-text">{{#if ../mine}}{{prop "message"}}{{else}}… paid it forward to …{{/if}}</p>
-        </li>
-        {{/each}}
-      </ol>
-    </script>
-    <script id="tpl-requests" type="text/x-handlebars-template">
-      <ol class="pif-list">
-        {{#each list}}
-        <li class="pif-item">
-          <p class="pif-meta">{{formatDate}}</p>
-          <div class="pif-content">
-            <img class="pif-picture" src="{{prop "author" "image"}}" />
-            <div class="pif-details">
-              <p class="pif-name">{{prop "author" "name"}}</p>
-              <p class="pif-message">is looking for an introduction to <strong>{{prop "message"}}</strong></p>
-            </div>
-          </div>
-          <div class="pif-pif">
-            <a class="pif-pif-inner" data-inline="true" data-mini="true" data-rel="dialog"
-              data-name="{{prop "author" "name"}}" data-id="{{prop "author" "id"}}" data-image="{{prop "author" "image"}}"
-              data-role="button" href="#forward">Pay It Forward</a>
-          </div>
-        </li>
-        {{/each}}
-      </ol>
-    </script>
-    <script id="tpl-leaderboard" type="text/x-handlebars-template">
-      <ol class="pif-list">
-        {{#list}}
-        <li class="pif-content pif-item">
-          <img class="pif-picture" src="{{author.image}}" />
-          <div class="pif-details">
-            <p class="pif-name">{{author.name}}</p>
-            <p class="pif-message">… paid it forward <strong>{{count}}</strong> times.</p>
-          </div>
-        </li>
-        {{/list}}
-      </ol>
-    </script>
-
-    <!-- Add JavaScript libraries -->
-    <script>
-      // Load ECMAScript5 shim if needed (Android 2.1, Firefox 3.5 and 3.6).
-      Object.defineProperty || document.write('<script src="vendor/es5-shim.min.js"><\/script>');
-      !isNaN(Date.parse('1970-01-01T00:00:00.000Z')) || document.write('<script src="vendor/iso8601.min.js"><\/script>');
-
-      // Load IndexedDB shim if needed.
-      window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB ||
-      document.write('<script src="vendor/IndexedDBShim.min.js"><\/script>');
-    </script>
-
-    <script src="//da189i1jfloii.cloudfront.net/js/kinvey-js-0.9.15.min.js"></script>
-    <script src="vendor/handlebars-1.0.0.beta.6.js"></script>
-    <script src="vendor/waypoints.min.js"></script>
-
-    <!-- Facebook -->
-    <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId: '<your-facebook-app-id>', // App ID
-          oauth: true
-        });
-      };
-
-      // Load the SDK Asynchronously.
-      (function(d){
-        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement('script'); js.id = id; js.async = true;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        ref.parentNode.insertBefore(js, ref);
-      }(document));
-    </script>
-
-    <!-- Application-specific JavaScript files -->
-    <script defer src="scripts/app.js"></script>
-    <script defer src="scripts/ui.js"></script>
+    <!-- Libraries. -->
+    <script src="vendor/jquery.mustache.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+    <script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.1.0.min.js"></script>
+    
+    <script src="scripts/app.js"></script>
   </body>
 </html>

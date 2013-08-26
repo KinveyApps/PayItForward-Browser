@@ -1,0 +1,16 @@
+<script id="request" type="text/html">
+{{#requests}}
+  <li{{#self}} class="me"{{/self}}>
+    {{^self}}
+    <a data-id="{{ _id }}" data-author="{{ author._id }}" data-rel="popup" href="#forward">
+    {{/self}}
+      <img src="{{ image }}" />
+      <p class="date">{{ date }}</p>
+      <h2>{{ name }}</h2>
+      <p>is looking for an introduction to <strong>{{ message }}</strong>.</p>
+    {{^self}}
+    </a>
+    {{/self}}
+  </li>
+{{/requests}}
+</script>

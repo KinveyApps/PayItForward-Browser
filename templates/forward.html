@@ -1,0 +1,18 @@
+<script id="forward" type="text/html">
+{{#requests}}
+  <li{{#self}} class="me"{{/self}}>
+    <p class="date forward">{{ date }}</p>
+    <h3 class="forward">“{{ message }}”</h3>
+    <div class="box ui-grid-a">
+      <div class="ui-block-a">
+        <img src="{{ image }}" />
+        <h2>{{ name }}</h2>
+      </div>
+      <div class="ui-block-b">
+        <img src="{{ toImage }}" />
+        <h2>{{ toName }}</h2>
+      </div>
+    </div>
+  </li>
+{{/requests}}
+</script>

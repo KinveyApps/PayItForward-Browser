@@ -1,0 +1,16 @@
+<script id="leaderboard" type="text/html">
+{{#hasLeaderboard}}
+  <ol class="data" data-role="listview" data-inset="true">
+    {{#leaderboard}}
+    <li{{#self}} class="me"{{/self}}>
+      <img src="{{ image }}" />
+      <h2>{{ name }}</h2>
+      <p>paid it forward <strong>{{ result }}</strong> times.</p>
+    </li>
+    {{/leaderboard}}
+  </ol>
+{{/hasLeaderboard}}
+{{^hasLeaderboard}}
+  <div class="ui-bar ui-bar-e">No data yet.</div>
+{{/hasLeaderboard}}
+</script>

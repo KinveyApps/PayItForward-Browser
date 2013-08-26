@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+.box {
+  overflow: hidden;
+}
+  .box .ui-block-b {
+    text-align: right;
+  }
+
+.hidden {
+  display: none !important;
+}
+
+.popup {
+  padding: 10px;
+}
+  .popup [data-role="controlgroup"] {
+    text-align: center;
+  }
+
+.data:empty + .empty {
+  display: block !important;
+}
+
+.date {
+  color: #AAAAAA;
+  font-size: .8em;
+}
+
+.forward {
+  text-align: center;
+}
+
+.me {
+  background-color: #dde;
+}

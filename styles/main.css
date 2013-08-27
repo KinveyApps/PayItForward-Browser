@@ -34,3 +34,8 @@
 .me {
   background-color: #dde;
 }
+
+.nowrap {
+  overflow: visible;
+  white-space: normal;
+}

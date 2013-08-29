@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- (function() {
+(function() {
   // Initialize jQuery Mobile.
   // http://api.jquerymobile.com/global-config/
   $(document).on('mobileinit', function() {
